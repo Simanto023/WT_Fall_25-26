@@ -104,3 +104,42 @@ th {
     margin-top: 0;
 }
 
+
+
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.form-actions {
+    margin-top: 15px;
+}
+
+.save {
+    background: #2d7a2d;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.cancel {
+    background: #444;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    margin-left: 10px;
+    cursor: pointer;
+}
