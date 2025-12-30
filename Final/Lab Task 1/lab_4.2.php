@@ -3,7 +3,7 @@
 <body>
 
 <?php
-$nameError =""; 
+$nameError = ""; 
 $emailError = "";
 $dobError = "";
 $genderError = "";
@@ -29,18 +29,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
     if (empty($_POST["email"])) {
-    $emailError = "Email is empty";
-    $isValid = false;
-} else {
-    $email = trim($_POST["email"]);
-
-    if (!preg_match("/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/", $email)) {
-        $emailError = "Invalid email format";
+        $emailError = "Email is empty";
         $isValid = false;
+    } else {
+        $email = trim($_POST["email"]);
+        if (!preg_match("/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/", $email)) {
+            $emailError = "Invalid email format";
+            $isValid = false;
+        }
     }
-}
 
-    
+
     if (empty($_POST["dd"]) || empty($_POST["mm"]) || empty($_POST["yy"])) {
         $dobError = "Date required";
         $isValid = false;
@@ -51,13 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $isValid = false;
     }
 
-    
+
     if (!isset($_POST["gender"])) {
         $genderError = "Gender required";
         $isValid = false;
     }
 
-    
+
     if (!isset($_POST["degree"]) || count($_POST["degree"]) < 2) {
         $degreeError = "Select at least two";
         $isValid = false;
@@ -89,10 +88,10 @@ Gender:
 <?php echo $genderError; ?><br><br>
 
 Degree:
-<input type="checkbox" name="degree" value="SSC">SSC
-<input type="checkbox" name="degree" value="HSC">HSC
-<input type="checkbox" name="degree" value="BSc">BSc
-<input type="checkbox" name="degree" value="MSc">MSC
+<input type="checkbox" name="degree[]" value="SSC">SSC
+<input type="checkbox" name="degree[]" value="HSC">HSC
+<input type="checkbox" name="degree[]" value="BSc">BSc
+<input type="checkbox" name="degree[]" value="MSc">MSC
 <?php echo $degreeError; ?><br><br>
 
 Blood Group:
