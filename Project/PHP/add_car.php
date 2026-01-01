@@ -14,13 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $price           = $_POST["price"];
     $category        = $_POST["category"];
 
-    //empty check
+    //empty
     if (
         empty($brand) || empty($model) || empty($color) ||
         empty($engine_capacity) || empty($horsepower) ||
         empty($transmission) || empty($price) || empty($category)
     ) {
-        header("Location: ../manage_cars.php?error=1");
+        header("Location: ../manage_cars.php?error=1&openForm=1");
         exit;
     }
 
@@ -38,8 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../manage_cars.php");
         exit;
     }
-    header("Location: ../manage_cars.php?error=1");
-    exit;
+
    
 }
 ?>

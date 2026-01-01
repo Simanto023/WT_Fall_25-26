@@ -1,11 +1,15 @@
 <?php
 
 $carError = "";
+$openForm = false;
 
 if (isset($_GET["error"])) {
     $carError = "All fields are required";
 }
 
+if (isset($_GET["openForm"])) {
+    $openForm = true;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,7 +41,7 @@ if (isset($_GET["error"])) {
 
    
 
-    <!-- table -->
+    <!-- table-->
     <table>
         <thead>
             <tr>
@@ -62,7 +66,8 @@ if (isset($_GET["error"])) {
     <form id="carForm"
           method="post"
           action="PHP/add_car.php"
-          enctype="multipart/form-data">
+          enctype="multipart/form-data"
+          style="display: <?php echo $openForm ? 'block' : 'none'; ?>;">
 
         <h3>Add / Edit Car</h3>
 
