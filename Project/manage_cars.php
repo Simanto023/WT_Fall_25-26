@@ -1,12 +1,21 @@
+<?php
+
+$carError = "";
+
+if (isset($_GET["error"])) {
+    $carError = "All fields are required";
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Manage Cars | NG Auto</title>
     <link rel="stylesheet" href="css/manage_cars.css">
+    <script src="js/manage_cars.js" defer></script>
 </head>
 
-<script src="js/manage_cars.js"></script>
 <body>
 
 <header>
@@ -26,6 +35,9 @@
         <button type="button" onclick="toggleForm()">+ Add New Car</button>
     </div>
 
+   
+
+    <!-- table -->
     <table>
         <thead>
             <tr>
@@ -41,10 +53,8 @@
                 <th>Actions</th>
             </tr>
         </thead>
-
         <tbody>
-            
-            <tr>
+    <tr>
                 <td><img src="images/cars/audi_a6.png" class="car-thumb"></td>
                 <td>Audi</td>
                 <td>A6</td>
@@ -78,7 +88,12 @@
         </tbody>
     </table>
 
-    <form id="carForm" method="post" action="PHP/add_car.php" enctype="multipart/form-data">
+    
+    <form id="carForm"
+          method="post"
+          action="PHP/add_car.php"
+          enctype="multipart/form-data">
+
         <h3>Add / Edit Car</h3>
 
         <div class="form-group">
@@ -93,22 +108,17 @@
 
         <div class="form-group">
             <label>Color</label>
-            <input type="text" name="color" placeholder="e.g. Black, White, Red">
-        </div>
-
-        <div class="form-group">
-            <label>Price</label>
-            <input type="number" name="price">
+            <input type="text" name="color">
         </div>
 
         <div class="form-group">
             <label>Engine Capacity (L)</label>
-            <input type="text" name="engine_capacity" placeholder="e.g. 1.8L">
+            <input type="text" name="engine_capacity">
         </div>
 
         <div class="form-group">
             <label>Horsepower (HP)</label>
-            <input type="number" name="horsepower" placeholder="e.g. 150">
+            <input type="number" name="horsepower">
         </div>
 
         <div class="form-group">
@@ -118,6 +128,11 @@
                 <option>Manual</option>
                 <option>CVT</option>
             </select>
+        </div>
+
+        <div class="form-group">
+            <label>Price</label>
+            <input type="number" name="price">
         </div>
 
         <div class="form-group">
@@ -137,11 +152,17 @@
             <button type="submit" class="save">Save</button>
             <button type="button" class="cancel" onclick="toggleForm()">Cancel</button>
         </div>
+         <!-- error message-->
+    <?php
+if (!empty($carError)) {
+    echo "<ul style='color:red; font-size:12px; margin-top:8px'>";
+    echo "<li>$carError</li>";
+    echo "</ul>";
+}
+?>
     </form>
 
 </main>
-
-
 
 </body>
 </html>
