@@ -25,7 +25,7 @@
 
             <div class="field">
                 <label>Full Name:</label>
-                <input type="text" name="fullname" placeholder="Enter full name">
+                <input type="text" name="fullname" placeholder="Enter full name (2+ chars, only letters allowed)">
             </div>
            <?php
             if (!empty($nameErrors)) {

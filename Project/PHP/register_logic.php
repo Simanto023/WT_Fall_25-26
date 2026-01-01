@@ -11,14 +11,23 @@ function test_input($data) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $fullname = $_POST["fullname"];
-    $email    = $_POST["email"];
-    $password = $_POST["password"];
-    $confirm  = $_POST["confirm_password"];
+    $fullname = test_input($_POST["fullname"]);
+    $email    = test_input($_POST["email"]);
+    $password = test_input($_POST["password"]);
+    $confirm  = test_input($_POST["confirm_password"]);
 
     // NAME
     if (empty($fullname)) {
         $nameErrors[] = "Full name is required";
+    }
+    if (!preg_match("/^[a-zA-Z ]+$/", $fullname)) {
+    $nameErrors[] = "Name can contain only letters and spaces";
+    }
+    if (strlen($fullname) < 2) {
+    $nameErrors[] = "Name must be at least 2 characters";
+    }
+    if (preg_match("/\s{2,}/", $fullname)) {
+    $nameErrors[] = "Name should not contain multiple spaces";
     }
 
     // EMAIL
@@ -39,26 +48,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $passwordErrors[] = "Passwords do not match";
     }
 
-    if (!empty($password)) {
-
-        $password = test_input($password);
-
-        if (strlen($password) < 8) {
-            $passwordErrors[] = "At least 8 characters";
-        }
-        if (!preg_match("/[A-Z]/", $password)) {
-            $passwordErrors[] = "At least 1 uppercase letter";
-        }
-        if (!preg_match("/[a-z]/", $password)) {
-            $passwordErrors[] = "At least 1 lowercase letter";
-        }
-        if (!preg_match("/[0-9]/", $password)) {
-            $passwordErrors[] = "At least 1 number";
-        }
-        if (!preg_match("/[@$!%*?&#]/", $password)) {
-            $passwordErrors[] = "At least 1 special character";
-        }
+    if (strlen($password) < 8) {
+        $passwordErrors[] = "At least 8 characters";
     }
+     if (!preg_match("/[A-Z]/", $password)) {
+         $passwordErrors[] = "At least 1 uppercase letter";
+    }
+    if (!preg_match("/[a-z]/", $password)) {
+        $passwordErrors[] = "At least 1 lowercase letter";
+     }
+    if (!preg_match("/[0-9]/", $password)) {
+        $passwordErrors[] = "At least 1 number";
+     }
+    if (!preg_match("/[@$!%*?&#]/", $password)) {
+        $passwordErrors[] = "At least 1 special character";
+     }
+    
 
     // Database entry
     if (empty($nameErrors) && empty($emailErrors) && empty($passwordErrors)) {
