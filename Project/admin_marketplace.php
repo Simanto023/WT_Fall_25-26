@@ -2,8 +2,19 @@
 include __DIR__ . "/DB/db.php";
 
 $listings = [];
+$filterStatus = "all";
+if (isset($_GET["status"])) {
+    $filterStatus = $_GET["status"];
+}
 
-$sql = "SELECT * FROM marketplace_listings ORDER BY id DESC";
+if ($filterStatus == "all") {
+    $sql = "SELECT * FROM marketplace_listings ORDER BY id DESC";
+} else {
+    $sql = "SELECT * FROM marketplace_listings 
+            WHERE status = '$filterStatus' 
+            ORDER BY id DESC";
+}
+
 $result = $conn->query($sql);
 
 if ($result && $result->num_rows > 0) {
@@ -11,6 +22,8 @@ if ($result && $result->num_rows > 0) {
         $listings[] = $row;
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,12 +52,12 @@ if ($result && $result->num_rows > 0) {
 </div>
 <form method="get" style="margin-bottom:20px;">
     <label style="margin-right:10px;">Filter by status:</label>
-    <select name="status">
-        <option value="all">All Listings</option>
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
-        <option value="rejected">Rejected</option>
-    </select>
+<select name="status">
+    <option value="all" <?php if ($filterStatus=="all") echo "selected"; ?>>All Listings</option>
+    <option value="pending" <?php if ($filterStatus=="pending") echo "selected"; ?>>Pending</option>
+    <option value="approved" <?php if ($filterStatus=="approved") echo "selected"; ?>>Approved</option>
+    <option value="rejected" <?php if ($filterStatus=="rejected") echo "selected"; ?>>Rejected</option>
+</select>
     <button type="submit">Apply</button>
 </form>
 
