@@ -69,7 +69,23 @@ if (isset($_GET["openForm"])) {
             </tr>
         </thead>
         <tbody>
-    
+    <?php
+if (!empty($cars)) {
+    foreach ($cars as $car) {
+        echo "<tr>";
+        echo "<td>—</td>";
+        echo "<td>{$car['brand']}</td>";
+        echo "<td>{$car['model']}</td>";
+        echo "<td>{$car['color']}</td>";
+        echo "<td>{$car['engine_capacity']}</td>";
+        echo "<td>{$car['horsepower']}</td>";
+        echo "<td>{$car['transmission']}</td>";
+        echo "<td>{$car['price']}</td>";
+        echo "<td>{$car['category']}</td>";
+        echo "</tr>";
+    }
+}
+?>
         </tbody>
     </table>
 
