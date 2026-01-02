@@ -1,6 +1,7 @@
 <?php
 include __DIR__ . "/DB/db.php";
 
+$categoryError = "";
 $categories = [];
 $sql="SELECT * FROM categories";
 $result = $conn->query($sql);
@@ -9,6 +10,9 @@ if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $categories[] = $row;
     }
+}
+if (isset($_GET["error"])) {
+    $categoryError = "Category name is required";
 }
 
 ?>
@@ -71,6 +75,13 @@ foreach ($categories as $cat) {
             <button type="submit" class="save">Save</button>
             <button type="button" class="cancel" onclick="toggleForm()">Cancel</button>
         </div>
+         <?php
+if (!empty($categoryError)) {
+    echo "<ul style='color:red; font-size:12px; margin-top:8px'>";
+    echo "<li>$categoryError</li>";
+    echo "</ul>";
+}
+?>
     </form>
 
 </main>
