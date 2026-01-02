@@ -14,6 +14,7 @@ if ($result && $result->num_rows > 0) {
 $carError = "";
 $openForm = false;
 $editCar = null;
+
 if (isset($_GET["error"])) {
     $carError = "All fields are required";
 }
@@ -94,7 +95,7 @@ if (!empty($cars)) {
         echo "<td>{$car['price']}</td>";
         echo "<td>{$car['category']}</td>";
         echo "<td>
-                <button class="edit" onclick="editCar(<?php echo $car['id']; ?>)">Edit</button>
+                <button class='edit' onclick='editCar({$car['id']})'>Edit</button>
                 <button class='delete'>Delete</button>
               </td>";
         echo "</tr>";
@@ -107,7 +108,7 @@ if (!empty($cars)) {
     
     <form id="carForm"
           method="post"
-          action="PHP/add_car.php"
+          action="PHP/<?php echo $editCar ? 'update_car.php' : 'add_car.php'; ?>"
           enctype="multipart/form-data"
           style="display: <?php echo $openForm ? 'block' : 'none'; ?>;">
 
