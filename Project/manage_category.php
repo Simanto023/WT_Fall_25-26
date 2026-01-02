@@ -38,7 +38,7 @@ if (isset($_GET["openForm"])) {
             <span>NG AUTO</span>
         </div>
 
-        <a href="admin_dashboard.html" class="back">← Back to Dashboard</a>
+        <a href="admin_dashboard.php" class="back">← Back to Dashboard</a>
     </div>
 </header>
 

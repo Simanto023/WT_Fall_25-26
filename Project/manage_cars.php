@@ -31,6 +31,14 @@ if (isset($_GET['edit'])) {
         $editCar = $editResult->fetch_assoc();
     }
 }
+$activeCategories = [];
+
+$catResult = $conn->query("SELECT * FROM categories WHERE status='active'");
+if ($catResult && $catResult->num_rows > 0) {
+    while ($row = $catResult->fetch_assoc()) {
+        $activeCategories[] = $row;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,7 +57,7 @@ if (isset($_GET['edit'])) {
             <img src="images/logo.png" alt="NG Auto">
             <span>NG AUTO</span>
         </div>
-        <a href="admin_dashboard.html" class="back">← Back to Dashboard</a>
+        <a href="admin_dashboard.php" class="back">← Back to Dashboard</a>
     </div>
 </header>
 
@@ -156,11 +164,13 @@ if (!empty($cars)) {
         </div>
 
         <div class="form-group">
-            <label>Category</label>
             <select name="category">
-                <option>Family</option>
-                <option>Sports</option>
-            </select>
+    <?php
+          foreach ($activeCategories as $cat) {
+          echo "<option value='{$cat['name']}'>{$cat['name']}</option>";
+        }
+    ?>
+</select>
         </div>
 
         <div class="form-group">
