@@ -13,3 +13,8 @@ function archiveCategory(id) {
         window.location.href = "PHP/archive_category.php?id=" + id;
     }
 }
+function activateCategory(id) {
+    if (confirm("Activate this category?")) {
+        window.location.href = "PHP/activate_category.php?id=" + id;
+    }
+}

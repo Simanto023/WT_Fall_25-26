@@ -83,7 +83,13 @@ th {
     cursor: pointer;
     border-radius: 4px;
 }
-
+.activate {
+    background: #3178c0c8;
+    color: white;
+    padding: 6px 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}
 
 #categoryForm {
     display: none;

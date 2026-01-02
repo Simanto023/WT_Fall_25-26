@@ -57,15 +57,22 @@ if (isset($_GET["openForm"])) {
         </thead>
 
         <tbody>
-            <?php
+           <?php
 foreach ($categories as $cat) {
     echo "<tr>";
     echo "<td>{$cat['name']}</td>";
-        echo "<td>{$cat['status']}</td>";
-    echo "<td>
-            <button class='delete' onclick='deleteCategory({$cat['id']})'>Delete</button>
-            <button class='archive' onclick='archiveCategory({$cat['id']})'>Archive</button>
-          </td>";
+    echo "<td>{$cat['status']}</td>";
+    echo "<td>";
+
+    echo "<button class='delete' onclick='deleteCategory({$cat['id']})'>Delete</button>";
+
+    if ($cat['status'] == 'active') {
+        echo "<button class='archive' onclick='archiveCategory({$cat['id']})'>Archive</button>";
+    } else {
+        echo "<button class='activate' onclick='activateCategory({$cat['id']})'>Activate</button>";
+    }
+
+    echo "</td>";
     echo "</tr>";
 }
 ?>
