@@ -2,7 +2,7 @@
 include __DIR__ . "/DB/db.php";
 
 $categories = [];
-$sql="SELECT * FROM categories"
+$sql="SELECT * FROM categories";
 $result = $conn->query($sql);
 
 if ($result && $result->num_rows > 0) {
@@ -47,37 +47,19 @@ if ($result && $result->num_rows > 0) {
         </thead>
 
         <tbody>
-            <tr>
-                <td>suv</td>
-                <td>
-                    <button class="delete" type="button" onclick="return cannotDelete()">
-                        Delete
-                    </button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>family cars</td>
-                <td>
-                    <button class="delete" type="button"
-                        onclick="return confirm('Delete this category?')">
-                        Delete
-                    </button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>sports cars</td>
-                <td>
-                    <button class="delete" type="button"
-                        onclick="return confirm('Delete this category?')">
-                        Delete
-                    </button>
-                </td>
-            </tr>
+            <?php
+foreach ($categories as $cat) {
+    echo "<tr>";
+    echo "<td>{$cat['name']}</td>";
+    echo "<td>
+            <button class='delete' onclick='deleteCategory({$cat['id']})'>Delete</button>
+          </td>";
+    echo "</tr>";
+}
+?>
         </tbody>
     </table>
-    <form id="categoryForm">
+    <form method="post" action="PHP/add_category.php">
         <h3>Add Category</h3>
 
         <div class="form-group">
