@@ -51,6 +51,7 @@ if (isset($_GET["openForm"])) {
         <thead>
             <tr>
                 <th>Category Name</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -60,8 +61,10 @@ if (isset($_GET["openForm"])) {
 foreach ($categories as $cat) {
     echo "<tr>";
     echo "<td>{$cat['name']}</td>";
+        echo "<td>{$cat['status']}</td>";
     echo "<td>
             <button class='delete' onclick='deleteCategory({$cat['id']})'>Delete</button>
+            <button class='archive' onclick='archiveCategory(id)'>Archive</button>
           </td>";
     echo "</tr>";
 }
