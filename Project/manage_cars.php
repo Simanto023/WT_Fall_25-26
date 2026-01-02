@@ -13,13 +13,22 @@ if ($result && $result->num_rows > 0) {
 
 $carError = "";
 $openForm = false;
-
+$editCar = null;
 if (isset($_GET["error"])) {
     $carError = "All fields are required";
 }
 
 if (isset($_GET["openForm"])) {
     $openForm = true;
+}
+if (isset($_GET['edit'])) {
+    $openForm = true;
+    $editId = $_GET['edit'];
+
+    $editResult = $conn->query("SELECT * FROM cars WHERE id = $editId");
+    if ($editResult && $editResult->num_rows == 1) {
+        $editCar = $editResult->fetch_assoc();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -85,7 +94,7 @@ if (!empty($cars)) {
         echo "<td>{$car['price']}</td>";
         echo "<td>{$car['category']}</td>";
         echo "<td>
-                <button class='edit'>Edit</button>
+                <button class="edit" onclick="editCar(<?php echo $car['id']; ?>)">Edit</button>
                 <button class='delete'>Delete</button>
               </td>";
         echo "</tr>";
