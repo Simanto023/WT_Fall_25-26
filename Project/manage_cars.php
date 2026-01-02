@@ -63,7 +63,7 @@ if (isset($_GET["openForm"])) {
                 <th>Engine</th>
                 <th>HP</th>
                 <th>Transmission</th>
-                <th>Price</th>
+                <th>Price($)</th>
                 <th>Category</th>
                 <th>Actions</th>
             </tr>
