@@ -1,3 +1,17 @@
+<?php
+include __DIR__ . "/DB/db.php";
+
+$categories = [];
+$sql="SELECT * FROM categories"
+$result = $conn->query($sql);
+
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $categories[] = $row;
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
