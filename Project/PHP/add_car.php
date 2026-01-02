@@ -18,14 +18,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (
         empty($brand) || empty($model) || empty($color) ||
         empty($engine_capacity) || empty($horsepower) ||
-        empty($transmission) || empty($price) || empty($category)
+        empty($transmission) || empty($price) || empty($category)||empty($_FILES["image"]["name"])
     ) {
         header("Location: ../manage_cars.php?error=1&openForm=1");
         exit;
     }
 
-    //image empty for now 
-    $image = "";
+    //image 
+     $image = time() . "_" . $_FILES["image"]["name"];
+     $targetPath = "../images/cars/" . $image;
+     move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath);
+
 
     //insert
     $sql = "INSERT INTO cars 
