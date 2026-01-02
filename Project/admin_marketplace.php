@@ -72,13 +72,30 @@ if (!empty($listings)) {
         echo "<td>{$row['phone_number']}</td>";
         echo "<td>{$row['status']}</td>";
 
-        echo "<td>
-                <button class='save'>Approve</button>
-                <button class='cancel'>Reject</button>
-                <button class='delete'>Delete</button>
-              </td>";
+        
 
-        echo "</tr>";
+        echo "<td>";
+
+    if ($row['status'] == 'pending') {
+        echo "
+        <button class='save'>Approve</button>
+        <button class='cancel'>Reject</button>
+        <button class='delete'>Delete</button>
+     ";
+    }
+    elseif ($row['status'] == 'approved') {
+        echo "
+        <button class='delete'>Remove</button>
+     ";
+    }
+    elseif ($row['status'] == 'rejected') {
+        echo "
+        <button class='delete'>Delete</button>
+     ";
+    }
+
+    echo "</td>";
+
     }
 }
 ?>
