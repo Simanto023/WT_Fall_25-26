@@ -2,6 +2,8 @@
 include __DIR__ . "/DB/db.php";
 
 $categoryError = "";
+$openForm = false;
+
 $categories = [];
 $sql="SELECT * FROM categories";
 $result = $conn->query($sql);
@@ -14,6 +16,9 @@ if ($result && $result->num_rows > 0) {
 if (isset($_GET["error"])) {
     $categoryError = "Category name is required";
 }
+if (isset($_GET["openForm"])) {
+    $openForm = true;
+}
 
 ?>
 <!DOCTYPE html>
@@ -23,7 +28,7 @@ if (isset($_GET["error"])) {
     <title>Manage Categories | NG Auto</title>
     <link rel="stylesheet" href="css/manage_category.css">
 </head>
-<script src="js/manage_category.js">
+<script src="js/manage_category.js" defer>
 </script>
 <body>
 <header>
@@ -63,9 +68,7 @@ foreach ($categories as $cat) {
 ?>
         </tbody>
     </table>
-    <form method="post" action="PHP/add_category.php">
-        <h3>Add Category</h3>
-
+<form id="categoryForm" method="post" action="PHP/add_category.php" style="display: <?php echo $openForm ? 'block' : 'none'; ?>;">
         <div class="form-group">
             <label>Category Name</label>
             <input type="text" name="category_name" placeholder="e.g. SUV, Sedan">

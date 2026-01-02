@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["category_name"];
 
     if (empty($name)) {
-        header("Location: ../manage_category.php?error=1");
+        header("Location: ../manage_category.php?error=1&openForm=1");
         exit;
     }
 
