@@ -2,7 +2,7 @@
 
 include __DIR__ . "/DB/db.php";
 
-$adminId = 18;
+$adminId = 18; //manual because session not done
 $carsCount = 0;
 $pendingListings = 0;
 $categoryCount = 0;
@@ -68,7 +68,7 @@ if ($resultcategories) {
 
         <div class="stats">
             <div>
-                <strong>128</strong>
+                <strong><?php echo $carsCount; ?></strong>
                 <span>Total Cars</span>
             </div>
             <div>
@@ -76,11 +76,11 @@ if ($resultcategories) {
                 <span>Active Orders</span>
             </div>
             <div>
-                <strong>6</strong>
+                <strong><?php echo $pendingListings; ?></strong>
                 <span>Pending Listings</span>
             </div>
             <div>
-                <strong>9</strong>
+                <strong><?php echo $categoryCount; ?></strong>
                 <span>Categories</span>
             </div>
         </div>
