@@ -30,26 +30,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "SELECT * FROM users WHERE email='$email'";
         $result = $conn->query($sql);
 
-        if ($result->num_rows == 1) {
+        if ($result && $result->num_rows == 1) {
 
             $user = $result->fetch_assoc();
 
             //pass check
             if (password_verify($password, $user["password"])) {
 
+                session_start();
+
+                $_SESSION['user_id']   = $user['id'];
+                $_SESSION['role']      = $user['role'];
+                $_SESSION['full_name'] = $user['full_name'];
+
                 //role check
-                if ($user["role"] == "admin") {
-                    echo "<script>
-                            window.location.href = 'admin_dashboard.html';
-                          </script>";
-                    exit;
+                if ($user['role'] == 'admin') {
+                    header("Location: admin_dashboard.php");
+                } else {
+                    header("Location: customer_dashboard.php");
                 }
-                else {
-                    echo "<script>
-                            window.location.href = '../customer_dashboard.html';
-                          </script>";
-                    exit;
-                }
+                exit;
 
             } else {
                 $loginErrors[] = "Invalid password!";

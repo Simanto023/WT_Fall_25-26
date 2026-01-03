@@ -2,6 +2,12 @@
 
 include __DIR__ . "/DB/db.php";
 
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+    header("Location: login.php");
+    exit;
+}
+
 $adminId = 18; //manual because session not done
 $carsCount = 0;
 $pendingListings = 0;

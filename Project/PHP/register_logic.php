@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($conn->query($sql)) {
     echo "<script>
             alert('Registration successful! Please login.');
-            window.location.href = 'login.html';
+            window.location.href = 'login.php';
           </script>";
     exit;
 }

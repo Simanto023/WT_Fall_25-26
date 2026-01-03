@@ -1,18 +1,7 @@
 <?php
-include "PHP/login_logic.php";
 session_start();
+include "PHP/login_logic.php";
 
-$_SESSION['user_id'] = $row['id'];
-$_SESSION['role'] = $row['role'];
-$_SESSION['full_name'] = $row['full_name'];
-
-
-if ($row['role'] == 'admin') {
-    header("Location: ../admin_dashboard.php");
-} else {
-    header("Location: ../customer_dashboard.php");
-}
-exit;
 ?>
 <!DOCTYPE html>
 <html>
