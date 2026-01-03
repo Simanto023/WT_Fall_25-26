@@ -1,3 +1,19 @@
+<?php 
+
+include __DIR__ . "/DB/db.php";
+
+$adminId = 18;
+
+$adminResult = $conn->query("SELECT full_name FROM users WHERE id = $adminId");
+
+$adminName = "Admin";
+
+if ($adminResult && $adminResult->num_rows == 1) {
+    $row = $adminResult->fetch_assoc();
+    $fullName = $row['full_name'];
+    $adminName = explode(" ", $fullName)[0];
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +45,7 @@
 <main>
 
     <div class="welcome-card">
-        <h2>Welcome back, Admin!</h2>
+        <h2>Welcome back,<?php echo $adminName; ?>!</h2>
         <p>Here’s a quick overview of today’s system activity.</p>
 
         <div class="stats">

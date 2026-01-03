@@ -85,7 +85,7 @@ foreach ($listings as $row) {
     echo "<td>{$row['car_name']}</td>";
     echo "<td>{$row['brand']}</td>";
     echo "<td>{$row['location']}</td>";
-    echo "<td>{$row['condition']}</td>";
+    echo "<td>{$row['cond']}</td>";
     echo "<td>$ {$row['price']}</td>";
     echo "<td>{$row['phone_number']}</td>";
     echo "<td>{$row['status']}</td>";
