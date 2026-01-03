@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-$adminId = 18; //manual because session not done
+$adminId = $_SESSION['user_id']; //manual because session not done
 $carsCount = 0;
 $pendingListings = 0;
 $categoryCount = 0;
