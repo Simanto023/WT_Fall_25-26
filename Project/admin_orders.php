@@ -48,25 +48,65 @@ if ($result && $result->num_rows > 0) {
                 <th>Phone</th>
                 <th>Address</th>
                 <th>Status</th>
-                <th>Order Date</th>
-                <th>Actions</th>
+                 <th>Actions</th>
+                   <th>Order Date</th>
+               
+               
             </tr>
         </thead>
 
         <tbody>
-            <tr>
-                foreach ($orders as $order) {
-    echo "<tr>";
-     echo "<td>#ORD{$order['id']}</td>";
-    echo "<td>{$order['user_id']}</td>";
-    echo "<td>{$order['total_amount']}</td>";
-    echo "<td>{$order['phone_number']}</td>";
-    echo "<td>{$order['address']}</td>";
-      echo "<td>{$order['status']}</td>";
-    echo "<td>{$order['created_at']}</td>";
-    echo "</tr>";
-}
-            </tr>
+     <?php
+        foreach ($orders as $order) {
+            echo "<tr>";
+
+            echo "<td>{$order['id']}</td>";
+            echo "<td>{$order['user_id']}</td>";
+            echo "<td>{$order['car_name']}</td>";
+            echo "<td>{$order['address']}</td>";
+            echo "<td>{$order['phone_number']}</td>";
+            echo "<td>{$order['total_amount']}</td>";
+
+            echo "<td>
+                <form method='post' action='PHP/update_order_status.php'>
+                    <input type='hidden' name='order_id' value='{$order['id']}'>
+
+                    <label>
+                        <input type='radio' name='status' value='pending' ".($order['status']=='pending'?'checked':'').">
+                        Pending
+                    </label><br>
+
+                    <label>
+                        <input type='radio' name='status' value='confirmed' ".($order['status']=='confirmed'?'checked':'').">
+                        Confirmed
+                    </label><br>
+
+                    <label>
+                        <input type='radio' name='status' value='shipped' ".($order['status']=='shipped'?'checked':'').">
+                        Shipped
+                    </label><br>
+
+                    <label>
+                        <input type='radio' name='status' value='completed' ".($order['status']=='completed'?'checked':'').">
+                        Completed
+                    </label><br>
+
+                    <label>
+                        <input type='radio' name='status' value='cancelled' ".($order['status']=='cancelled'?'checked':'').">
+                        Cancelled
+                    </label>
+            </td>";
+
+            echo "<td>
+                    <button type='submit' class='save'>Save</button>
+                </form>
+            </td>";
+           echo "<td>{$order['created_at']}</td>";
+            echo "</tr>";
+            
+        }
+        
+        ?>
         </tbody>
     </table>
 
