@@ -1,3 +1,16 @@
+<?php
+include __DIR__ . "/DB/db.php";
+
+$orders = [];
+$sql = "SELECT * FROM orders ORDER BY created_at DESC";
+$result = $conn->query($sql);
+
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $orders[] = $row;
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +54,18 @@
         </thead>
 
         <tbody>
-            
+            <tr>
+                foreach ($orders as $order) {
+    echo "<tr>";
+     echo "<td>#ORD{$order['id']}</td>";
+    echo "<td>{$order['user_id']}</td>";
+    echo "<td>{$order['total_amount']}</td>";
+    echo "<td>{$order['phone_number']}</td>";
+    echo "<td>{$order['address']}</td>";
+      echo "<td>{$order['status']}</td>";
+    echo "<td>{$order['created_at']}</td>";
+    echo "</tr>";
+}
             </tr>
         </tbody>
     </table>
