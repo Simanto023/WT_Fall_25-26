@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-$adminId = $_SESSION['user_id']; //manual because session not done
+$adminId = $_SESSION['user_id']; //stores admin id from session
 $carsCount = 0;
 $pendingListings = 0;
 $categoryCount = 0;
@@ -96,7 +96,7 @@ if ($resultcategories) {
         <div class="admin-actions">
             <a href="manage_Cars.php" class="admin-btn">Manage Cars</a>
             <a href="manage_category.php" class="admin-btn">Manage Categories</a>
-            <a href="#" class="admin-btn">View Orders</a>
+            <a href="admin_orders.php" class="admin-btn">View Orders</a>
             <a href="admin_marketplace.php" class="admin-btn">Marketplace</a>
         </div>
     </div>
